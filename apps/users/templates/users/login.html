@@ -1,0 +1,64 @@
+{% extends "users/template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+
+<div class="login_container">
+<h1>Welcome to Handy Helper</h1>
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    <div class="register">
+        <h1>Register</h1>
+        <form action="/process_register/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="f_name">First Name:</label>
+                <input type="text" class="form-control" name="f_name">
+            </div>
+            <div class="form-group">
+                <label for="l_name">Last Name:</label>
+                <input type="text" class="form-control" name="l_name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" class="form-control" name="confirm_password">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <div class="login">
+        <h1>Login</h1>
+        <form action="/process_login/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label form="text">Password:</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

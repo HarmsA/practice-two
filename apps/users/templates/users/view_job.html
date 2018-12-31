@@ -1,0 +1,22 @@
+
+{% extends "users/template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+
+<header class="back_logout">
+    <a href="{% url 'users:dashboard' %}" class="btn btn-default">Back</a>
+    <a href="{% url 'users:logout' %}" class="btn btn-default">Logout</a>
+</header>
+
+{{ job.title }}
+<div id="job_info">
+    <p>Description: {{ job.description }}</p>
+    <p>Location: {{ job.location }}</p>
+    <p>Posted By: {{ job.creator.f_name }} {{ job.creator.l_name }}</p>
+    <p>Posted on: {{ job.created_at }}</p>
+</div><br>
+    <a href="{% url 'users:create_job_for_user' job.id %}" class="btn btn-default">Add to My Jobs</a>
+{% endblock %}

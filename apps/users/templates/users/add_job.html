@@ -1,0 +1,39 @@
+
+{% extends "users/template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+<header class="back_logout">
+    <a href="{% url 'users:dashboard' %}" class="btn btn-default">Back</a>
+    <a href="{% url 'users:logout' %}" class="btn btn-default">logout</a>
+
+</header>
+    <h3>Add A Job</h3>
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <form action="/addjob_verify/" method="post">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" name="title">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" name="description">
+        </div>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" class="form-control" name="location">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+{% endblock %}

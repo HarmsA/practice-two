@@ -1,0 +1,35 @@
+.login, .register {
+    width: 45%;
+    display: inline-block;
+    padding-left: 2.5%;
+    vertical-align: top;
+}
+.login_container {
+    margin: 10%;
+}
+.container {
+    margin-top: 30px;
+}
+#jobtable{
+    width: 65%;
+    display: inline-block;
+}
+#mytable {
+    width: 30%;
+    display: inline-block;
+}
+.add_job_button{
+    /*position: absolute;*/
+    margin-left: 400px;
+}
+#mytable {
+    vertical-align: top;
+}
+#job_info {
+    border: 1px solid black;
+    margin-top: 10px;
+    width: 50%;
+}
+.back_logout {
+    margin-left: 70%;
+}

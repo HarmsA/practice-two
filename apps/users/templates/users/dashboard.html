@@ -1,0 +1,74 @@
+
+{% extends "users/template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+
+<header class="back_logout">
+    <a href="{% url 'users:logout' %}" class="btn btn-default">logout</a>
+    <a href="{% url 'users:addjob' %}" class="btn btn-default">Add A Job</a>
+</header>
+
+   <p><h3>Welcome {{ name.f_name }}!</h3></p>
+
+<table id="jobtable" class="table">
+    <thead>
+        <tr>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+            {% if job.worker.id is not None %}
+{#                 ------- continue----------- #}
+            {% else %}
+            <tr>
+                <td>{{ job.title }}</td>
+                <td>{{ job.location }}</td>
+                {% if job.creator_id is name.id %}
+                    <td><a href="{% url 'users:view_job' job.id %}"
+                                class="btn btn-default">View</a>
+                        <a href="{% url 'users:create_job_for_user' job.id %}"
+                                class="btn btn-default">Add</a>
+                        <a href="{% url 'users:edit_job' job.id %}"
+                                class="btn btn-default">Edit</a>
+                        <a href="{% url 'users:delete' job.id %}"
+                                class="btn btn-default">Cancel</a>
+                    </td>
+                {% else %}
+                    <td><a href="{% url 'users:view_job' job.id %}"
+                                class="btn btn-default">View</a>
+                        <a href="{% url 'users:create_job_for_user' job.id %}"
+                                class="btn btn-default">Add</a>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+<table id="mytable" class="table">
+    <thead>
+        <tr>
+            <th>My Jobs</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for job in jobs %}
+        {% if job.worker.id is name.id %}
+        <tr>
+            <td>{{ job.title }}</td>
+            <th><a href="{% url 'users:view_job' job.id %}" class="btn btn-default">View</a>
+                <a href="{% url 'users:delete' job.id %}" class="btn btn-default">Done</a>
+            </th>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
